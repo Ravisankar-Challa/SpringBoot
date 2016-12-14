@@ -1,0 +1,23 @@
+spring:
+  h2:
+  console:
+    enabled: true
+    path: /h2-console
+  main.banner-mode: 'off'
+  profiles.active: local-sandbox
+server.compression:
+  enabled: true
+  mime-types: application/json,text/plain
+---
+spring.profiles: local-sandbox
+config:
+  property1: 'Hello Hai'
+---
+spring.profiles: dev,staging,production
+property1: ${property1:'Hello Hai'}
+---
+spring.profiles: production
+#endpoints.enabled: false
+#endpoints.health.enabled: health
+#management.health.defaults.enabled: false
+---

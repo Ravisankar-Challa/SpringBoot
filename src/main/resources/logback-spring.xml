@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<springProfile name="local-sandbox">
+		<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+			<!-- <encoder>
+		      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		    </encoder> -->
+		
+			 <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+				<jsonGeneratorDecorator class="com.example.util.PrettyPrintingJsonDecorator"/>
+				<fieldNames>
+				    <timestamp>[ignore]</timestamp>
+				    <version>[ignore]</version>
+					<levelValue>[ignore]</levelValue>
+					<level>[ignore]</level>
+					<!-- <thread>[ignore]</thread>
+					<logger>[ignore]</logger> -->
+			  </fieldNames>
+			  <includeContext>false</includeContext>
+			</encoder>
+		</appender>
+
+		<root level="info">
+			<appender-ref ref="STDOUT" />
+		</root>
+	</springProfile>
+	
+</configuration>
