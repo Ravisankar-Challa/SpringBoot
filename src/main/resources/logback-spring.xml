@@ -14,8 +14,8 @@
 				    <version>[ignore]</version>
 					<levelValue>[ignore]</levelValue>
 					<level>[ignore]</level>
-					<!-- <thread>[ignore]</thread>
-					<logger>[ignore]</logger> -->
+					<thread>[ignore]</thread>
+					<logger>[ignore]</logger>
 			  </fieldNames>
 			  <includeContext>false</includeContext>
 			</encoder>
