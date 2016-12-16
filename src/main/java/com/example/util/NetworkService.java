@@ -49,20 +49,31 @@ public class NetworkService {
                                                     }})
                                                 .build();
     public static void main(String[] args) {;
-        post("http://www.qantas.com/au/en.html",
+        post("http://localhost:9090/au/en.html/{hotel}/{booking}",
+                new HashMap<String, String>() {{
+                    put("hotel", "42");
+                    put("booking", "21");
+                    }},
                 new HashMap<String, String>() {{
             put("gdf","dgf");
-        }}, new Test("jgfdgl"));
+        }},new Test("jgfdgl"));
     }
     
-    public static String post(final String url, final Map<String, String> headers, final Object body) {
-        return invoke(url, HttpMethod.POST, null, headers, body);
+    public static String post(final String url, final Map<String, String> urlParams,
+                              final Map<String, String> headers, Object body) {
+        return invoke(HttpMethod.POST, url, urlParams, null, headers, body);
     }
     
-    public static String invoke(final String url, final HttpMethod httpMethod, 
-                                final Map<String, String> queryParams,
-                                final Map<String, String> headers,
-                                final Object body) {
+    public static String put(final String url, final Map<String, String> urlParams,
+                              final Map<String, String> headers, Object body) {
+    return invoke(HttpMethod.PUT, url, urlParams, null, headers, body);
+    }
+    
+    public static String invoke(final HttpMethod httpMethod, final String url, 
+                                    final Map<String, String> urlParams,
+                                    final Map<String, String> queryParams,
+                                    final Map<String, String> headers,
+                                    final Object body) {
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString(url);
         if(queryParams != null) {
             queryParams.forEach((name, value) -> uriComponentsBuilder.queryParam(name, value));
@@ -71,8 +82,9 @@ public class NetworkService {
         if(headers != null) {
             headers.forEach((name, value) -> httpHeaders.add(name, value));
         }
-        return restTemplate.exchange(uriComponentsBuilder.build().toUri(), httpMethod, new HttpEntity<Object>(body, httpHeaders), String.class).getBody();
+        return restTemplate.exchange(uriComponentsBuilder.build().toString(), httpMethod, new HttpEntity<Object>(body, httpHeaders), String.class, urlParams).getBody();
     }
 }
+
 
 
