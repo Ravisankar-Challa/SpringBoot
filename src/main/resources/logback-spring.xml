@@ -7,7 +7,7 @@
 		      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		    </encoder> -->
 		
-			 <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<!--  <encoder class="net.logstash.logback.encoder.LogstashEncoder">
 				<jsonGeneratorDecorator class="com.example.util.PrettyPrintingJsonDecorator"/>
 				<fieldNames>
 				    <timestamp>[ignore]</timestamp>
@@ -18,7 +18,11 @@
 					<logger>[ignore]</logger>
 			  </fieldNames>
 			  <includeContext>false</includeContext>
-			</encoder>
+			</encoder> -->
+			
+			 <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+             </encoder>
 		</appender>
 
 		<root level="info">
