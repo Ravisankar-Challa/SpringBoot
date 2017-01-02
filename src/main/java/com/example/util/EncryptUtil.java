@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.security.GeneralSecurityException;
+import java.security.Security;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
@@ -65,6 +66,9 @@ public class EncryptUtil {
     }
 
     private static void removedJavaCryrptographyRestrictions() {
+    	//Jdk 9 hack
+    	Security.setProperty("crypto.policy", "unlimited");
+    	//Jdk 8 hack remove the below code once moved to jdk(java) version 9
         try {
         	Field field = Class.forName("javax.crypto.JceSecurity").getDeclaredField("isRestricted");
         	Field modifiers = Field.class.getDeclaredField("modifiers");
