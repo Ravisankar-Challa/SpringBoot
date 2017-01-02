@@ -2,6 +2,7 @@ package com.example.util;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.security.GeneralSecurityException;
 import java.util.Base64;
 
@@ -63,13 +64,19 @@ public class EncryptUtil {
         }
     }
 
-    private void removedJavaCryrptographyRestrictions() {
+    private static void removedJavaCryrptographyRestrictions() {
         try {
-            Field field = Class.forName("javax.crypto.JceSecurity").getDeclaredField("isRestricted");
+        	Field field = Class.forName("javax.crypto.JceSecurity").getDeclaredField("isRestricted");
+        	Field modifiers = Field.class.getDeclaredField("modifiers");
+        	modifiers.setAccessible(true);
+        	if(Modifier.isFinal(field.getModifiers())) {
+        		modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        	}
             field.setAccessible(true);
             field.set(null, false);
-        } catch (SecurityException | NoSuchFieldException | ClassNotFoundException | IllegalArgumentException
-                | IllegalAccessException exp) {
+            field.setAccessible(false);
+        } catch (SecurityException | NoSuchFieldException | ClassNotFoundException | IllegalArgumentException | IllegalAccessException
+                exp) {
             log.error(exp.getMessage(), exp);
         }
     }
