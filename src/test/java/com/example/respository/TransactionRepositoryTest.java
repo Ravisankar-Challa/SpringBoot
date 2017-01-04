@@ -4,10 +4,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.TestBase;
 import com.example.entity.DBOrder;
@@ -43,8 +40,15 @@ public class TransactionRepositoryTest extends TestBase {
                                                  .build();
         
         transactionRepository.saveAndFlush(transaction);
-        
-        DBTransaction transaction1 = transactionRepository.findByTransactionId("TRANS2").orElseThrow(() -> new Exception("Not found"));
+    }
+    
+    @Test
+    public void cache_test() throws Exception {
+        DBTransaction transaction1 = transactionRepository.findByTransactionId("TRANS1").orElseThrow(() -> new Exception("Not found"));
+        transaction1 = transactionRepository.findByTransactionId("TRANS1").orElseThrow(() -> new Exception("Not found"));
+        transaction1 = transactionRepository.findByTransactionId("TRANS1").orElseThrow(() -> new Exception("Not found"));
+        transaction1 = transactionRepository.findByTransactionId("TRANS1").orElseThrow(() -> new Exception("Not found"));
+        transaction1 = transactionRepository.findByTransactionId("TRANS1").orElseThrow(() -> new Exception("Not found"));
         System.out.println(transaction1);
     }
 

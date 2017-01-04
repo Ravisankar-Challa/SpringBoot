@@ -50,6 +50,7 @@ flyway:
     enabled: false
 logging.level.org.hibernate.internal.util.EntityPrinter: trace
 logging.level.org.hibernate.type.descriptor.sql.BasicBinder: trace
+logging.level.org.springframework.cache: trace
 ---
 
 ## Environments configuration
