@@ -7,6 +7,7 @@ import java.security.GeneralSecurityException;
 import java.security.Security;
 import java.util.Base64;
 
+import javax.annotation.PostConstruct;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -26,12 +27,21 @@ public class EncryptUtil {
     private static final String UTF_8 = "UTF-8";
     private static final String AES = "AES";
     private static final String AES_CBC_PKCS5PADDING = "AES/CBC/PKCS5PADDING";
-
+    private static EncryptUtil encryptUtil;
     private ApplicationConfiguration config;
 
     public EncryptUtil(ApplicationConfiguration config) {
         this.config = config;
         removedJavaCryrptographyRestrictions();
+    }
+    
+    @PostConstruct
+    public void init() {
+        encryptUtil = this;
+    }
+    
+    public static EncryptUtil getInstance() {
+        return encryptUtil;
     }
 
     public String encrypt(String value) {

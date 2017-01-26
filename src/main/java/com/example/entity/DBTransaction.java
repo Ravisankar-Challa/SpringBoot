@@ -11,22 +11,20 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Table(name = "TRANSACTION")
 public class DBTransaction implements Serializable {
 

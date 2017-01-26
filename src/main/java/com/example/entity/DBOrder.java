@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,6 +43,10 @@ public class DBOrder implements Serializable {
 
     @Column(name = "CREATED_BY")
     private String createdBy;
+    
+    @Convert(converter = CryptoConverter.class)
+    @Column(name = "SECRET_KEY")
+    private String secretKey;
 
     @Column(name = "CREATED_TIMESTAMP")
     private ZonedDateTime createdOn;

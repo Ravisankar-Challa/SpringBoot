@@ -42,6 +42,7 @@ public class OrderRespositoryTest extends TestBase {
                                .currency("INR")
                                .orderCreatedOn(ZonedDateTime.now())
                                .updatedOn(ZonedDateTime.now())
+                               .secretKey("Hello World!!!")
                                .transaction(transaction)
                                .build();
 
