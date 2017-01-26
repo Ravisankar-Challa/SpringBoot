@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.MDC;
+import org.springframework.core.annotation.Order;
 
+@Order(1)
 @WebFilter(urlPatterns = { "/hello" },
            filterName = "LogRequestFilter",
            description = "Applied to all requests")

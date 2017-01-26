@@ -1,4 +1,4 @@
-#springfox.documentation.swagger.v2.path: /api-docs
+springfox.documentation.swagger.v2.path: /api-docs
 spring:
   profiles.active: local-sandbox
   main.banner-mode: 'off'
